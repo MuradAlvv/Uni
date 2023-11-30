@@ -10,7 +10,5 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     boolean existsByPin(String pin);
 
-    boolean existsById(Long id);
-
     Optional<UserEntity> findByPin(String pin);
 }

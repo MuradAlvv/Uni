@@ -1,4 +1,4 @@
-package com.example.unitech.persistence.metamodel.user;
+package com.example.unitech.persistence.metamodel;
 
 import com.example.unitech.persistence.entity.UserEntity;
 

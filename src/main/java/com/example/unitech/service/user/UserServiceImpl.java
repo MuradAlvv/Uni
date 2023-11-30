@@ -1,10 +1,10 @@
 package com.example.unitech.service.user;
 
-import static com.example.unitech.persistence.metamodel.user.User_.ID;
-import static com.example.unitech.persistence.metamodel.user.User_.PIN;
-import static com.example.unitech.persistence.metamodel.user.User_.USER;
-import static com.example.unitech.util.ErrorUtil.buildAlreadyExistsMessage;
-import static com.example.unitech.util.ErrorUtil.buildNotFoundMessage;
+import static com.example.unitech.common.Errors.buildAlreadyExistsMessage;
+import static com.example.unitech.common.Errors.buildNotFoundMessage;
+import static com.example.unitech.persistence.metamodel.User_.ID;
+import static com.example.unitech.persistence.metamodel.User_.PIN;
+import static com.example.unitech.persistence.metamodel.User_.USER;
 
 import com.example.unitech.dto.user.UserCreateDto;
 import com.example.unitech.exception.AlreadyExistsException;

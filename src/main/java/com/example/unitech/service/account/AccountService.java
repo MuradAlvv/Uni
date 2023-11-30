@@ -12,5 +12,7 @@ public interface AccountService {
 
     AccountEntity create(AccountEntity account);
 
+    AccountEntity getById(Long id);
+
     List<UserAccountResponseDto> getByUserId(Long id);
 }

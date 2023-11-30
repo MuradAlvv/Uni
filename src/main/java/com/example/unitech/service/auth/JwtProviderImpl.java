@@ -1,6 +1,6 @@
 package com.example.unitech.service.auth;
 
-import static com.example.unitech.persistence.metamodel.user.User_.PIN;
+import static com.example.unitech.persistence.metamodel.User_.PIN;
 
 import static io.jsonwebtoken.SignatureAlgorithm.HS512;
 

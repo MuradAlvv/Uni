@@ -7,3 +7,5 @@ databaseChangeLog:
       file: db/changelog/ddl/db.changelog-accounts.yaml
   - include:
       file: db/changelog/dml/db.changelog-currencies.sql
+  - include:
+      file: db/changelog/ddl/db.changelog-transfers.yaml

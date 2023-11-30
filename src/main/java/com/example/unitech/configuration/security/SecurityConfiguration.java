@@ -1,5 +1,8 @@
 package com.example.unitech.configuration.security;
 
+import com.example.unitech.service.auth.JwtProvider;
+import com.example.unitech.util.ErrorResponseHandler;
+
 import lombok.SneakyThrows;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,29 +11,40 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-@EnableWebSecurity
 public class SecurityConfiguration {
 
     @Bean
     @SneakyThrows
     public SecurityFilterChain filterChain(
-            HttpSecurity http, @Autowired final AuthenticationFilter authenticationFilter) {
+            HttpSecurity http,
+            @Autowired JwtProvider jwtProvider,
+            @Autowired ErrorResponseHandler errorResponseHandler) {
         http.authorizeHttpRequests(
                         (requests) ->
-                                requests.requestMatchers("/api/v1/users/**", "/api/v1/auth/**")
+                                requests.requestMatchers(
+                                                "/api/v1/users/**",
+                                                "/api/v1/auth/**",
+                                                "/v3/**",
+                                                "/swagger-ui/**")
                                         .permitAll()
                                         .anyRequest()
-                                        .authenticated())
+                                        .permitAll()
+                                        .and()
+                                        .addFilterBefore(
+                                                new AuthenticationFilter(
+                                                        jwtProvider, errorResponseHandler),
+                                                UsernamePasswordAuthenticationFilter.class))
                 .csrf()
                 .disable()
-                .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         return http.build();
     }

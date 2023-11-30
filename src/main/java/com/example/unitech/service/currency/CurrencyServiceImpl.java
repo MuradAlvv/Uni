@@ -1,8 +1,8 @@
 package com.example.unitech.service.currency;
 
-import static com.example.unitech.persistence.metamodel.currency.Currency_.CURRENCY;
-import static com.example.unitech.persistence.metamodel.currency.Currency_.ID;
-import static com.example.unitech.util.ErrorUtil.buildNotFoundMessage;
+import static com.example.unitech.common.Errors.buildNotFoundMessage;
+import static com.example.unitech.persistence.metamodel.Currency_.CURRENCY;
+import static com.example.unitech.persistence.metamodel.Currency_.ID;
 
 import com.example.unitech.exception.NotFoundException;
 import com.example.unitech.persistence.entity.CurrencyEntity;
