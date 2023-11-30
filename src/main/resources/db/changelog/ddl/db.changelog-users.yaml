@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-users-table
+      author: Murad Aliyev
+      context: ddl
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_users
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: pin
+                  type: VARCHAR(255)
+                  constraints:
+                    unique: true
+            tableName: users
+        - createIndex:
+            columns:
+              - column:
+                  name: pin
+            indexName: pin_idx
+            tableName: users
