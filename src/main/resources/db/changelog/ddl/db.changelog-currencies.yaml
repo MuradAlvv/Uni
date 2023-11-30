@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-currencies-table
+      author: Murad Aliyev
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_currencies
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: code
+                  type: VARCHAR(3)
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: symbol
+                  type: VARCHAR(255)
+            tableName: currencies
+

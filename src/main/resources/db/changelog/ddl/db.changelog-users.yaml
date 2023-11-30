@@ -19,7 +19,14 @@ databaseChangeLog:
                   type: VARCHAR(255)
                   constraints:
                     unique: true
+                    nullable: false
+              - column:
+                  name: password
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
             tableName: users
+
         - createIndex:
             columns:
               - column:

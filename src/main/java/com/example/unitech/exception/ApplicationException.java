@@ -1,8 +1,8 @@
 package com.example.unitech.exception;
 
-import org.springframework.http.HttpStatusCode;
-
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
+
+import org.springframework.http.HttpStatus;
 
 public class ApplicationException extends RuntimeException {
 
@@ -10,7 +10,7 @@ public class ApplicationException extends RuntimeException {
         super(message);
     }
 
-    public HttpStatusCode getStatusCode() {
+    public HttpStatus getStatusCode() {
         return BAD_REQUEST;
     }
 }

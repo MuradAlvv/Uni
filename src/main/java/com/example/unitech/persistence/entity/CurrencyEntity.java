@@ -6,10 +6,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.Index;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,18 +18,16 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(
-        name = "\"users\"",
-        indexes = {@Index(name = "pin_idx", columnList = "pin")})
-public class UserEntity {
+@Table(name = "currencies")
+public class CurrencyEntity {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @Column(unique = true)
-    @NotBlank
-    private String pin;
+    @Column(length = 3)
+    private String code;
 
-    @NotNull private String password;
+    private String name;
+    private String symbol;
 }
