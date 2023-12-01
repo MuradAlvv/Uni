@@ -1,5 +1,6 @@
 package com.example.unitech;
 
+import static com.example.unitech.common.TransferStatus.FAILED;
 import static lombok.AccessLevel.PRIVATE;
 
 import static org.mockito.Mockito.mock;
@@ -11,6 +12,7 @@ import com.example.unitech.dto.transfer.TransferCreateDto;
 import com.example.unitech.dto.user.UserCreateDto;
 import com.example.unitech.persistence.entity.AccountEntity;
 import com.example.unitech.persistence.entity.CurrencyEntity;
+import com.example.unitech.persistence.entity.TransferEntity;
 import com.example.unitech.persistence.entity.UserEntity;
 
 import lombok.NoArgsConstructor;
@@ -75,5 +77,12 @@ public final class CommonModel {
         toAccount.setCurrency(buildCurrency());
 
         return toAccount;
+    }
+
+    public static TransferEntity buildFailedTransfer() {
+        TransferEntity transfer = new TransferEntity();
+        transfer.setStatus(FAILED);
+
+        return transfer;
     }
 }
