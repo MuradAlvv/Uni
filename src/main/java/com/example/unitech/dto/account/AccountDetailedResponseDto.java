@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AccountCreatedResponseDto {
+public class AccountDetailedResponseDto {
     private Long id;
     private BigDecimal balance;
     private CurrencyResponseDto currency;

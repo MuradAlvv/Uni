@@ -1,12 +1,10 @@
 package com.example.unitech.util;
 
-import static lombok.AccessLevel.PRIVATE;
-
-import static org.springframework.http.HttpHeaders.AUTHORIZATION;
-
 import jakarta.servlet.http.HttpServletRequest;
-
 import lombok.NoArgsConstructor;
+
+import static lombok.AccessLevel.PRIVATE;
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 @NoArgsConstructor(access = PRIVATE)
 public final class SecurityUtil {
@@ -18,6 +16,10 @@ public final class SecurityUtil {
         if (!bearer.startsWith(BEARER)) {
             throw new RuntimeException();
         }
+        return extractToken(bearer);
+    }
+
+    public static String extractToken(String bearer) {
         return bearer.split("\\s")[1];
     }
 }

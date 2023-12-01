@@ -26,6 +26,7 @@ public class TransferServiceImpl implements TransferService {
     public TransferEntity create(TransferCreateDto transferCreateDto) {
         validateForSameAccount(transferCreateDto);
         TransferEntity transfer = new TransferEntity();
+        transfer.setAmount(transferCreateDto.getAmount());
         transfer.setFromAccount(accountService.getById(transferCreateDto.getFromAccountId()));
         validateAccountActivity(transfer.getFromAccount());
         validateTransferAmount(transfer.getFromAccount(), transferCreateDto.getAmount());
@@ -33,6 +34,11 @@ public class TransferServiceImpl implements TransferService {
         validateAccountActivity(transfer.getToAccount());
 
         return transferHandler.create(transfer);
+    }
+
+    @Override
+    public Boolean isUserAccount(Long userId, Long accountId) {
+        return accountService.getById(accountId).getUser().getId().equals(userId);
     }
 
     private void validateForSameAccount(TransferCreateDto transferCreateDto) {

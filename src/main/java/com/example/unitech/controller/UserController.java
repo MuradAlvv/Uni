@@ -7,6 +7,9 @@ import com.example.unitech.dto.user.UserResponseDto;
 import com.example.unitech.mapper.UserMapper;
 import com.example.unitech.service.user.UserService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import jakarta.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
@@ -20,11 +23,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/users")
+@Tag(name = "UserController")
 public class UserController {
 
     private final UserService userService;
     private final UserMapper userMapper;
 
+    @Operation(description = "Register via Pin")
     @PostMapping
     @ResponseStatus(CREATED)
     public UserResponseDto create(@RequestBody @Valid final UserCreateDto source) {

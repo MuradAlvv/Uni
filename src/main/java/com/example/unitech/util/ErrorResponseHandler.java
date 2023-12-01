@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ErrorResponseHandler {
 
-    private final ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @SneakyThrows
     public void setResponse(ServletResponse servletResponse, String message) {

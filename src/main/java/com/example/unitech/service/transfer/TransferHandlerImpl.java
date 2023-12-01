@@ -30,9 +30,9 @@ public class TransferHandlerImpl implements TransferHandler {
         val toAccount = transfer.getToAccount();
         fromAccount.setBalance(fromAccount.getBalance().subtract(amount));
         toAccount.setBalance(toAccount.getBalance().add(amount));
-        transfer.setStatus(SUCCEEDED);
         accountRepository.save(fromAccount);
         accountRepository.save(toAccount);
+        transfer.setStatus(SUCCEEDED);
 
         return transferRepository.save(transfer);
     }

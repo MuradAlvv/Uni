@@ -6,4 +6,6 @@ import com.example.unitech.persistence.entity.TransferEntity;
 public interface TransferService {
 
     TransferEntity create(TransferCreateDto transferCreateDto);
+
+    Boolean isUserAccount(Long userId, Long accountId);
 }
