@@ -55,6 +55,9 @@ public class TransferServiceImpl implements TransferService {
         } catch (Exception e) {
             log.error("Error in transfer: ", e);
             transfer.setStatus(FAILED);
+            transferRepository.save(transfer);
+
+            return transferRepository.getByIdFetchUser(transfer.getId());
         }
         transfer.setStatus(SUCCEEDED);
         transferRepository.save(transfer);

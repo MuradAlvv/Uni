@@ -1,5 +1,7 @@
 package com.example.unitech.dto.account;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import jakarta.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -12,6 +14,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AccountCreateDto {
-    @NotNull private Long userId;
+
+    @Schema(hidden = true)
+    private Long userId;
+
     @NotNull private Long currencyId;
 }

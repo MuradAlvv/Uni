@@ -1,7 +1,6 @@
 package com.example.unitech.controller;
 
 import static com.example.unitech.configuration.OpenAPI30Configuration.BEARER_AUTHENTICATION;
-import static com.example.unitech.util.SecurityUtil.extractToken;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.CREATED;
@@ -23,6 +22,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
+import lombok.val;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,7 +50,12 @@ public class AccountController {
             security = @SecurityRequirement(name = BEARER_AUTHENTICATION))
     @PostMapping
     @ResponseStatus(CREATED)
-    public AccountDetailedResponseDto create(@RequestBody @Valid final AccountCreateDto source) {
+    public AccountDetailedResponseDto create(
+            @RequestBody @Valid final AccountCreateDto source,
+            @RequestHeader(value = AUTHORIZATION, required = false) final String bearer) {
+        val userId = jwtParser.getUserIdFromBearer(bearer);
+        source.setUserId(userId);
+
         return accountMapper.toDetailedResponse(accountService.create(source));
     }
 
@@ -61,8 +66,7 @@ public class AccountController {
     public List<UserAccountResponseDto> getByUserId(
             @PathVariable final Long userId,
             @RequestHeader(value = AUTHORIZATION, required = false) final String bearer) {
-
-        if (FALSE == jwtParser.getUserId(extractToken(bearer)).equals(userId)) {
+        if (FALSE == jwtParser.getUserIdFromBearer(bearer).equals(userId)) {
             throw new ForbiddenException("Forbidden");
         }
         return accountService.getByUserId(userId);

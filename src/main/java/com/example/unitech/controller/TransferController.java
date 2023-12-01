@@ -1,7 +1,6 @@
 package com.example.unitech.controller;
 
 import static com.example.unitech.configuration.OpenAPI30Configuration.BEARER_AUTHENTICATION;
-import static com.example.unitech.util.SecurityUtil.extractToken;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.CREATED;
@@ -49,18 +48,15 @@ public class TransferController {
     public TransferResponseDto create(
             @RequestBody @Valid TransferCreateDto source,
             @RequestHeader(value = AUTHORIZATION, required = false) String bearer) {
-
-        val userId = jwtParser.getUserId(extractToken(bearer));
+        val userId = jwtParser.getUserIdFromBearer(bearer);
         validate(source.getFromAccountId(), userId);
 
-        val transfer = transferService.create(source);
-
-        return transferMapper.toResponse(transfer);
+        return transferMapper.toResponse(transferService.create(source));
     }
 
     private void validate(Long accountId, Long userId) {
         if (FALSE == transferService.isUserAccount(userId, accountId)) {
-            throw new ForbiddenException("it is not your account");
+            throw new ForbiddenException("Forbidden");
         }
     }
 }

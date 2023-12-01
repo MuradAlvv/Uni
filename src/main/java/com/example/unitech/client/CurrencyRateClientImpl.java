@@ -1,6 +1,7 @@
 package com.example.unitech.client;
 
 import com.example.unitech.dto.currencyrate.CurrencyRateRequestDto;
+import com.example.unitech.dto.currencyrate.CurrencyRateResponseDto;
 
 import org.springframework.stereotype.Component;
 
@@ -10,7 +11,7 @@ public class CurrencyRateClientImpl implements CurrencyRateClient {
 
     /** Assuming that every call of this method has cost */
     @Override
-    public Double getRate(CurrencyRateRequestDto source) {
-        return 1.7;
+    public CurrencyRateResponseDto getRate(CurrencyRateRequestDto source) {
+        return new CurrencyRateResponseDto(source.getPair(), 1.7);
     }
 }

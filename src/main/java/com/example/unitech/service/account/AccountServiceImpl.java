@@ -59,6 +59,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public List<UserAccountResponseDto> getByUserId(Long id) {
         userService.getById(id);
+
         return accountRepository.getByUserId(id);
     }
 }

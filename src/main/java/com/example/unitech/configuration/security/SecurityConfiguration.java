@@ -31,6 +31,8 @@ public class SecurityConfiguration {
                                 requests.requestMatchers(
                                                 "/api/v1/users/**",
                                                 "/api/v1/auth/**",
+                                                "/api/v1/currencies/**",
+                                                "/api/v1/currency-rates/**",
                                                 "/v3/**",
                                                 "/swagger-ui/**")
                                         .permitAll()

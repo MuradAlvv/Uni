@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CurrencyServiceImpl implements CurrencyService {
@@ -26,5 +28,10 @@ public class CurrencyServiceImpl implements CurrencyService {
                         () ->
                                 new NotFoundException(
                                         buildNotFoundMessage(CURRENCY, ID, String.valueOf(id))));
+    }
+
+    @Override
+    public List<CurrencyEntity> getAll() {
+        return currencyRepository.findAll();
     }
 }

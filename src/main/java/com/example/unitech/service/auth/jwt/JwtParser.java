@@ -10,4 +10,6 @@ public interface JwtParser {
     Authentication getAuthentication(String token);
 
     Long getUserId(String token);
+
+    Long getUserIdFromBearer(String bearer);
 }

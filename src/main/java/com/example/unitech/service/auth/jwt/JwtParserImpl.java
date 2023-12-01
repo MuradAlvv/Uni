@@ -2,6 +2,7 @@ package com.example.unitech.service.auth.jwt;
 
 import static com.example.unitech.persistence.metamodel.User_.ID;
 import static com.example.unitech.persistence.metamodel.User_.PIN;
+import static com.example.unitech.util.SecurityUtil.extractToken;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -48,6 +49,11 @@ public class JwtParserImpl implements JwtParser {
     @Override
     public Long getUserId(String token) {
         return Long.parseLong((String) (parseClaims(token).get(ID)));
+    }
+
+    @Override
+    public Long getUserIdFromBearer(String bearer) {
+        return getUserId(extractToken(bearer));
     }
 
     public Claims parseClaims(String token) {
