@@ -59,7 +59,8 @@ public class AccountController {
             security = @SecurityRequirement(name = BEARER_AUTHENTICATION))
     @GetMapping("/users/{userId}")
     public List<UserAccountResponseDto> getByUserId(
-            @PathVariable final Long userId, @RequestHeader(value = AUTHORIZATION, required = false) final String bearer) {
+            @PathVariable final Long userId,
+            @RequestHeader(value = AUTHORIZATION, required = false) final String bearer) {
 
         if (FALSE == jwtParser.getUserId(extractToken(bearer)).equals(userId)) {
             throw new ForbiddenException("Forbidden");
