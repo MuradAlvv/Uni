@@ -1,0 +1,22 @@
+version: '3.0'
+
+services:
+  unitech:
+    container_name: unitech
+    build:
+      context: /
+      dockerfile: Dockerfile
+    ports:
+      - '8080:8080'
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+  postgres:
+    container_name: postgres
+    restart: on-failure
+    image: postgres:latest
+    ports:
+      - '5432:5432'
+    environment:
+      - DATABASE=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres

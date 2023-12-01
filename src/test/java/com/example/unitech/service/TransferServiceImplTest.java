@@ -6,8 +6,8 @@ import static com.example.unitech.CommonModel.buildFromAccount;
 import static com.example.unitech.CommonModel.buildToAccount;
 import static com.example.unitech.CommonModel.buildTransferCreateDto;
 import static com.example.unitech.common.AccountStatus.INACTIVE;
-
 import static com.example.unitech.common.TransferStatus.FAILED;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -40,17 +40,13 @@ import java.math.BigDecimal;
 @ExtendWith(MockitoExtension.class)
 class TransferServiceImplTest {
 
-    @Mock
-    private AccountService accountService;
+    @Mock private AccountService accountService;
 
-    @Mock
-    private TransferHandler transferHandler;
+    @Mock private TransferHandler transferHandler;
 
-    @Mock
-    private TransferRepository transferRepository;
+    @Mock private TransferRepository transferRepository;
 
-    @InjectMocks
-    private TransferServiceImpl transferService;
+    @InjectMocks private TransferServiceImpl transferService;
 
     @Test
     void testCreateSuccessfulTransfer() {
