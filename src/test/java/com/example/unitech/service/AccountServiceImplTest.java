@@ -1,5 +1,20 @@
 package com.example.unitech.service;
 
+import static com.example.unitech.CommonModel.DEFAULT_LONG;
+import static com.example.unitech.CommonModel.buildAccountCreateDto;
+import static com.example.unitech.CommonModel.buildActiveAccount;
+import static com.example.unitech.CommonModel.buildCurrency;
+import static com.example.unitech.CommonModel.buildUser;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import com.example.unitech.common.AccountStatus;
 import com.example.unitech.dto.account.AccountCreateDto;
 import com.example.unitech.dto.account.UserAccountResponseDto;
@@ -11,6 +26,7 @@ import com.example.unitech.persistence.repository.AccountRepository;
 import com.example.unitech.service.account.AccountServiceImpl;
 import com.example.unitech.service.currency.CurrencyService;
 import com.example.unitech.service.user.UserService;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -22,34 +38,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static com.example.unitech.CommonModel.DEFAULT_LONG;
-import static com.example.unitech.CommonModel.buildAccountCreateDto;
-import static com.example.unitech.CommonModel.buildActiveAccount;
-import static com.example.unitech.CommonModel.buildCurrency;
-import static com.example.unitech.CommonModel.buildUser;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @ExtendWith(MockitoExtension.class)
 class AccountServiceImplTest {
 
-    @Mock
-    private AccountRepository accountRepository;
+    @Mock private AccountRepository accountRepository;
 
-    @Mock
-    private UserService userService;
+    @Mock private UserService userService;
 
-    @Mock
-    private CurrencyService currencyService;
+    @Mock private CurrencyService currencyService;
 
-    @InjectMocks
-    private AccountServiceImpl accountService;
+    @InjectMocks private AccountServiceImpl accountService;
 
     @Test
     void testCreate() {

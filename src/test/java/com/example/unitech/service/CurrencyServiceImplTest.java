@@ -1,9 +1,19 @@
 package com.example.unitech.service;
 
+import static com.example.unitech.CommonModel.DEFAULT_LONG;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import com.example.unitech.exception.NotFoundException;
 import com.example.unitech.persistence.entity.CurrencyEntity;
 import com.example.unitech.persistence.repository.CurrencyRepository;
 import com.example.unitech.service.currency.CurrencyServiceImpl;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -14,22 +24,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static com.example.unitech.CommonModel.DEFAULT_LONG;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @ExtendWith(MockitoExtension.class)
 class CurrencyServiceImplTest {
 
-    @Mock
-    private CurrencyRepository currencyRepository;
+    @Mock private CurrencyRepository currencyRepository;
 
-    @InjectMocks
-    private CurrencyServiceImpl currencyService;
+    @InjectMocks private CurrencyServiceImpl currencyService;
 
     @Test
     void testGetById() {
@@ -66,4 +66,3 @@ class CurrencyServiceImplTest {
         verify(currencyRepository).findAll();
     }
 }
-

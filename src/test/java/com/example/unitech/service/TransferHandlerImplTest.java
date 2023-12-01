@@ -1,9 +1,14 @@
 package com.example.unitech.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import com.example.unitech.persistence.entity.AccountEntity;
 import com.example.unitech.persistence.entity.TransferEntity;
 import com.example.unitech.persistence.repository.AccountRepository;
 import com.example.unitech.service.transfer.TransferHandlerImpl;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,18 +18,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @ExtendWith(MockitoExtension.class)
 class TransferHandlerImplTest {
 
-    @Mock
-    private AccountRepository accountRepository;
+    @Mock private AccountRepository accountRepository;
 
-    @InjectMocks
-    private TransferHandlerImpl transferHandler;
+    @InjectMocks private TransferHandlerImpl transferHandler;
 
     @Test
     @Transactional
@@ -52,4 +51,3 @@ class TransferHandlerImplTest {
         verify(accountRepository).save(toAccount);
     }
 }
-

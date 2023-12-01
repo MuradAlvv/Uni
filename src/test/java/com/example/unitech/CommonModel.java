@@ -1,5 +1,10 @@
 package com.example.unitech;
 
+import static lombok.AccessLevel.PRIVATE;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import com.example.unitech.common.AccountStatus;
 import com.example.unitech.dto.account.AccountCreateDto;
 import com.example.unitech.dto.transfer.TransferCreateDto;
@@ -7,13 +12,10 @@ import com.example.unitech.dto.user.UserCreateDto;
 import com.example.unitech.persistence.entity.AccountEntity;
 import com.example.unitech.persistence.entity.CurrencyEntity;
 import com.example.unitech.persistence.entity.UserEntity;
+
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-
-import static lombok.AccessLevel.PRIVATE;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 @NoArgsConstructor(access = PRIVATE)
 public final class CommonModel {
