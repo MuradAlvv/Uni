@@ -44,4 +44,24 @@ public final class Errors {
             private final String value;
         }
     }
+
+    @NoArgsConstructor(access = PRIVATE)
+    public static final class Jwt {
+
+        @Getter
+        @RequiredArgsConstructor
+        public enum JwtExpiredError {
+            JWT_EXPIRED_MESSAGE("Jwt is expired");
+
+            private final String value;
+        }
+
+        @Getter
+        @RequiredArgsConstructor
+        public enum JwtInvalidError {
+            JWT_INVALID_MESSAGE("Jwt is invalid");
+
+            private final String value;
+        }
+    }
 }

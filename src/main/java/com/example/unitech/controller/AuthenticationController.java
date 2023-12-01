@@ -24,7 +24,7 @@ public class AuthenticationController {
 
     private final AuthService authService;
 
-    @Operation(description = "Login")
+    @Operation(description = "Login via pin and password")
     @PostMapping("/login")
     public TokenDto login(@RequestBody @Valid final UserLoginDto source) {
         return authService.login(source);

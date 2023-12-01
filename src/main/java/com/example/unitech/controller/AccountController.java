@@ -1,6 +1,7 @@
 package com.example.unitech.controller;
 
-import static com.example.unitech.configuration.OpenAPI30Configuration.BEAERER_AUTHENTICATION;
+import static com.example.unitech.configuration.OpenAPI30Configuration.BEARER_AUTHENTICATION;
+
 import static org.springframework.http.HttpStatus.CREATED;
 
 import com.example.unitech.dto.account.AccountCreateDto;
@@ -38,7 +39,7 @@ public class AccountController {
 
     @Operation(
             description = "Create account",
-            security = @SecurityRequirement(name = BEAERER_AUTHENTICATION))
+            security = @SecurityRequirement(name = BEARER_AUTHENTICATION))
     @PostMapping
     @ResponseStatus(CREATED)
     public AccountDetailedResponseDto create(@RequestBody @Valid final AccountCreateDto source) {
@@ -47,7 +48,7 @@ public class AccountController {
 
     @Operation(
             description = "List user accounts",
-            security = @SecurityRequirement(name = BEAERER_AUTHENTICATION))
+            security = @SecurityRequirement(name = BEARER_AUTHENTICATION))
     @GetMapping("/users/{userId}")
     public List<UserAccountResponseDto> getByUserId(@PathVariable final Long userId) {
         return accountService.getByUserId(userId);

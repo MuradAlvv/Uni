@@ -1,8 +1,10 @@
 package com.example.unitech.service.transfer;
 
 import static com.example.unitech.common.AccountStatus.INACTIVE;
+import static com.example.unitech.common.Errors.Transfer.InsufficientBalanceError.NOT_ENOUGH_BALANCE_MESSAGE;
+import static com.example.unitech.common.Errors.Transfer.TransferToInactiveAccountError.INACTIVE_ACCOUNT_TRANSFER_MESSAGE;
+import static com.example.unitech.common.Errors.Transfer.TransferToSameAccountError.TRANSFER_TO_SAME_ACCOUNT_MESSAGE;
 
-import com.example.unitech.common.Errors;
 import com.example.unitech.dto.transfer.TransferCreateDto;
 import com.example.unitech.exception.InvalidOperationException;
 import com.example.unitech.persistence.entity.AccountEntity;
@@ -48,24 +50,19 @@ public class TransferServiceImpl implements TransferService {
 
     private void validateForSameAccount(Long fromAccountId, Long toAccountId) {
         if (fromAccountId.equals(toAccountId)) {
-            throw new InvalidOperationException(
-                    Errors.Transfer.TransferToSameAccountError.TRANSFER_TO_SAME_ACCOUNT_MESSAGE
-                            .getValue());
+            throw new InvalidOperationException(TRANSFER_TO_SAME_ACCOUNT_MESSAGE.getValue());
         }
     }
 
     private void validateAccountActivity(AccountEntity account) {
         if (account.getStatus().equals(INACTIVE)) {
-            throw new InvalidOperationException(
-                    Errors.Transfer.TransferToInactiveAccountError.INACTIVE_ACCOUNT_TRANSFER_MESSAGE
-                            .getValue());
+            throw new InvalidOperationException(INACTIVE_ACCOUNT_TRANSFER_MESSAGE.getValue());
         }
     }
 
     private void validateTransferAmount(AccountEntity fromAccount, BigDecimal amount) {
         if (fromAccount.getBalance().compareTo(amount) < 0) {
-            throw new InvalidOperationException(
-                    Errors.Transfer.InsufficientBalanceError.NOT_ENOUGH_BALANCE_MESSAGE.getValue());
+            throw new InvalidOperationException(NOT_ENOUGH_BALANCE_MESSAGE.getValue());
         }
     }
 }

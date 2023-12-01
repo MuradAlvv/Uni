@@ -1,17 +1,24 @@
 package com.example.unitech.configuration.security;
 
+import static com.example.unitech.common.Errors.Jwt.JwtExpiredError.JWT_EXPIRED_MESSAGE;
+import static com.example.unitech.common.Errors.Jwt.JwtInvalidError.JWT_INVALID_MESSAGE;
+
 import com.example.unitech.service.auth.jwt.JwtParser;
 import com.example.unitech.util.ErrorResponseHandler;
 import com.example.unitech.util.SecurityUtil;
+
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -39,10 +46,10 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         } catch (Exception e) {
             if (e instanceof JwtException) {
                 if (e instanceof ExpiredJwtException) {
-                    responseHandler.setResponse(servletResponse, "Jwt is expired");
+                    responseHandler.setResponse(servletResponse, JWT_EXPIRED_MESSAGE.getValue());
                     return;
                 }
-                responseHandler.setResponse(servletResponse, "Invalid jwt");
+                responseHandler.setResponse(servletResponse, JWT_INVALID_MESSAGE.getValue());
                 return;
             }
             filterChain.doFilter(httpRequest, servletResponse);

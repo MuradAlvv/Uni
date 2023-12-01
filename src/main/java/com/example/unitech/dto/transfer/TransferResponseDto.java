@@ -2,8 +2,8 @@ package com.example.unitech.dto.transfer;
 
 import com.example.unitech.common.TransferStatus;
 import com.example.unitech.dto.account.AccountDetailedResponseDto;
-
 import com.example.unitech.dto.account.AccountResponseDto;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

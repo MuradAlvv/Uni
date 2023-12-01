@@ -13,5 +13,5 @@ import org.springframework.context.annotation.Configuration;
         bearerFormat = "JWT",
         scheme = "bearer")
 public class OpenAPI30Configuration {
-    public static final String BEAERER_AUTHENTICATION = "Bearer Authentication";
+    public static final String BEARER_AUTHENTICATION = "Bearer Authentication";
 }
