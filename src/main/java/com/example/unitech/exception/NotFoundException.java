@@ -1,5 +1,7 @@
 package com.example.unitech.exception;
 
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+
 import org.springframework.http.HttpStatus;
 
 public class NotFoundException extends ApplicationException {
@@ -9,6 +11,6 @@ public class NotFoundException extends ApplicationException {
 
     @Override
     public HttpStatus getStatusCode() {
-        return HttpStatus.NOT_FOUND;
+        return NOT_FOUND;
     }
 }

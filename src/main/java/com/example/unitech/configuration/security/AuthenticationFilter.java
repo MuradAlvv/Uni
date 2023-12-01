@@ -46,10 +46,10 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         } catch (Exception e) {
             if (e instanceof JwtException) {
                 if (e instanceof ExpiredJwtException) {
-                    responseHandler.setResponse(servletResponse, JWT_EXPIRED_MESSAGE.getValue());
+                    responseHandler.setResponse(servletResponse, JWT_EXPIRED_MESSAGE.getMessage());
                     return;
                 }
-                responseHandler.setResponse(servletResponse, JWT_INVALID_MESSAGE.getValue());
+                responseHandler.setResponse(servletResponse, JWT_INVALID_MESSAGE.getMessage());
                 return;
             }
             filterChain.doFilter(httpRequest, servletResponse);

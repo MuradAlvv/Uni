@@ -25,7 +25,7 @@ public final class Errors {
         public enum InsufficientBalanceError {
             NOT_ENOUGH_BALANCE_MESSAGE("Doesn't have enough balance");
 
-            private final String value;
+            private final String message;
         }
 
         @Getter
@@ -33,7 +33,7 @@ public final class Errors {
         public enum TransferToSameAccountError {
             TRANSFER_TO_SAME_ACCOUNT_MESSAGE("Transfer to same account is not allowed");
 
-            private final String value;
+            private final String message;
         }
 
         @Getter
@@ -41,7 +41,7 @@ public final class Errors {
         public enum TransferToInactiveAccountError {
             INACTIVE_ACCOUNT_TRANSFER_MESSAGE("Transfer to/from inactive account is not allowed");
 
-            private final String value;
+            private final String message;
         }
     }
 
@@ -53,7 +53,7 @@ public final class Errors {
         public enum JwtExpiredError {
             JWT_EXPIRED_MESSAGE("Jwt is expired");
 
-            private final String value;
+            private final String message;
         }
 
         @Getter
@@ -61,7 +61,7 @@ public final class Errors {
         public enum JwtInvalidError {
             JWT_INVALID_MESSAGE("Jwt is invalid");
 
-            private final String value;
+            private final String message;
         }
     }
 }
