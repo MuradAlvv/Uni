@@ -69,6 +69,14 @@ public class TransferController {
                             @Content(
                                     mediaType = APPLICATION_JSON,
                                     schema = @Schema(implementation = ErrorDto.class))
+                        }),
+                @ApiResponse(
+                        responseCode = "404",
+                        description = "Account with given id not found",
+                        content = {
+                            @Content(
+                                    mediaType = APPLICATION_JSON,
+                                    schema = @Schema(implementation = ErrorDto.class))
                         })
             })
     @PostMapping
