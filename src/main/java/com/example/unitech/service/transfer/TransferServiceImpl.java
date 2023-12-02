@@ -40,23 +40,23 @@ public class TransferServiceImpl implements TransferService {
         transfer.setAmount(transferCreateDto.getAmount());
         transfer.setFromAccount(fromAccount);
         transfer.setToAccount(toAccount);
-        setStatus(transfer, PENDING);
+        saveStatus(transfer, PENDING);
         log.info("Transfer started, status = " + transfer.getStatus());
         try {
             transferHandler.handle(transfer);
         } catch (Exception e) {
             log.error("Error in transfer: ", e);
-            setStatus(transfer, FAILED);
+            saveStatus(transfer, FAILED);
 
             return transferRepository.getByIdFetchUser(transfer.getId());
         }
-        setStatus(transfer, SUCCEEDED);
+        saveStatus(transfer, SUCCEEDED);
         log.info("Transfer status = " + transfer.getStatus());
 
         return transfer;
     }
 
-    private void setStatus(TransferEntity transfer, TransferStatus status) {
+    private void saveStatus(TransferEntity transfer, TransferStatus status) {
         transfer.setStatus(status);
         transferRepository.save(transfer);
     }
