@@ -49,11 +49,12 @@ public class TransferServiceImpl implements TransferService {
         } catch (Exception e) {
             log.error("Error in transfer: ", e);
             saveStatus(transfer, FAILED);
+            publishEvent(transfer);
 
             return transferRepository.getByIdFetchUser(transfer.getId());
         }
         saveStatus(transfer, SUCCEEDED);
-        eventPublisher.publishEvent(new TransferCompletedEvent(this, transfer));
+        publishEvent(transfer);
 
         return transfer;
     }
@@ -61,6 +62,10 @@ public class TransferServiceImpl implements TransferService {
     private void saveStatus(TransferEntity transfer, TransferStatus status) {
         transfer.setStatus(status);
         transferRepository.save(transfer);
+    }
+
+    private void publishEvent(TransferEntity transfer) {
+        eventPublisher.publishEvent(new TransferCompletedEvent(this, transfer));
     }
 
     @Override
