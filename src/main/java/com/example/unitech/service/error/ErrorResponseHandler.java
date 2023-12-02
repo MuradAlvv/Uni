@@ -1,4 +1,4 @@
-package com.example.unitech.util;
+package com.example.unitech.service.error;
 
 import static jakarta.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
 

@@ -4,7 +4,7 @@ import static com.example.unitech.common.Errors.Jwt.JwtExpiredError.JWT_EXPIRED_
 import static com.example.unitech.common.Errors.Jwt.JwtInvalidError.JWT_INVALID_MESSAGE;
 
 import com.example.unitech.service.auth.jwt.JwtParser;
-import com.example.unitech.util.ErrorResponseHandler;
+import com.example.unitech.service.error.ErrorResponseHandler;
 import com.example.unitech.util.SecurityUtil;
 
 import io.jsonwebtoken.ExpiredJwtException;

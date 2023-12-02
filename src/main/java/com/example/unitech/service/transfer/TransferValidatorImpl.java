@@ -7,15 +7,14 @@ import static com.example.unitech.common.Errors.Transfer.TransferToSameAccountEr
 
 import static java.lang.Boolean.FALSE;
 
+import com.example.unitech.annotation.Validator;
 import com.example.unitech.dto.transfer.TransferCreateDto;
 import com.example.unitech.exception.InvalidOperationException;
 import com.example.unitech.persistence.entity.AccountEntity;
 
-import org.springframework.stereotype.Component;
-
 import java.math.BigDecimal;
 
-@Component
+@Validator
 public class TransferValidatorImpl implements TransferValidator {
 
     @Override

@@ -1,7 +1,7 @@
 package com.example.unitech.configuration.security;
 
 import com.example.unitech.service.auth.jwt.JwtParser;
-import com.example.unitech.util.ErrorResponseHandler;
+import com.example.unitech.service.error.ErrorResponseHandler;
 
 import lombok.SneakyThrows;
 
