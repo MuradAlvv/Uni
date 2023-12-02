@@ -9,6 +9,13 @@ import lombok.RequiredArgsConstructor;
 @NoArgsConstructor(access = PRIVATE)
 public final class Errors {
 
+    @NoArgsConstructor(access = PRIVATE)
+    public static final class OpenAPI {
+        public static final String INVALID_REQUEST_BODY = "Invalid request body";
+        public static final String INVALID_BEARER = "Invalid bearer";
+        public static final String INVALID_CREDENTIALS = "Invalid credentials";
+    }
+
     public static String buildAlreadyExistsMessage(
             String entity, String uniqueField, String value) {
         return entity + " with " + uniqueField + " = " + value + " already exists";
@@ -61,6 +68,17 @@ public final class Errors {
         public enum JwtInvalidError {
             JWT_INVALID_MESSAGE("Jwt is invalid");
 
+            private final String message;
+        }
+    }
+
+    @NoArgsConstructor(access = PRIVATE)
+    public static final class Auth {
+
+        @Getter
+        @RequiredArgsConstructor
+        public enum InvalidCredentialsError {
+            INVALID_CREDENTIALS_ERROR("Invalid credentials");
             private final String message;
         }
     }

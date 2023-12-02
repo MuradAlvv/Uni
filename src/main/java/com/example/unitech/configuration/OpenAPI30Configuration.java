@@ -14,4 +14,5 @@ import org.springframework.context.annotation.Configuration;
         scheme = "bearer")
 public class OpenAPI30Configuration {
     public static final String BEARER_AUTHENTICATION = "Bearer Authentication";
+    public static final String APPLICATION_JSON = "application/json";
 }
