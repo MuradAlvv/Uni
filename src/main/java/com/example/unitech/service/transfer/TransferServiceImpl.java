@@ -4,6 +4,7 @@ import static com.example.unitech.common.TransferStatus.FAILED;
 import static com.example.unitech.common.TransferStatus.PENDING;
 import static com.example.unitech.common.TransferStatus.SUCCEEDED;
 
+import com.example.unitech.common.TransferStatus;
 import com.example.unitech.dto.transfer.TransferCreateDto;
 import com.example.unitech.persistence.entity.TransferEntity;
 import com.example.unitech.persistence.repository.TransferRepository;
@@ -39,26 +40,24 @@ public class TransferServiceImpl implements TransferService {
         transfer.setAmount(transferCreateDto.getAmount());
         transfer.setFromAccount(fromAccount);
         transfer.setToAccount(toAccount);
-        beginTransfer(transfer);
+        setStatus(transfer, PENDING);
         log.info("Transfer started, status = " + transfer.getStatus());
         try {
             transferHandler.handle(transfer);
         } catch (Exception e) {
             log.error("Error in transfer: ", e);
-            transfer.setStatus(FAILED);
-            transferRepository.save(transfer);
+            setStatus(transfer, FAILED);
 
             return transferRepository.getByIdFetchUser(transfer.getId());
         }
-        transfer.setStatus(SUCCEEDED);
-        transferRepository.save(transfer);
+        setStatus(transfer, SUCCEEDED);
         log.info("Transfer status = " + transfer.getStatus());
 
         return transfer;
     }
 
-    private void beginTransfer(TransferEntity transfer) {
-        transfer.setStatus(PENDING);
+    private void setStatus(TransferEntity transfer, TransferStatus status) {
+        transfer.setStatus(status);
         transferRepository.save(transfer);
     }
 
