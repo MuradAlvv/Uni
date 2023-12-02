@@ -28,6 +28,7 @@ import com.example.unitech.persistence.repository.TransferRepository;
 import com.example.unitech.service.account.AccountService;
 import com.example.unitech.service.transfer.TransferHandler;
 import com.example.unitech.service.transfer.TransferServiceImpl;
+import com.example.unitech.service.transfer.TransferValidator;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -45,6 +46,8 @@ class TransferServiceImplTest {
     @Mock private TransferHandler transferHandler;
 
     @Mock private TransferRepository transferRepository;
+
+    @Mock private TransferValidator transferValidator;
 
     @InjectMocks private TransferServiceImpl transferService;
 
@@ -108,6 +111,9 @@ class TransferServiceImplTest {
     public void testThrowInvalidOperationOnSameAccountTransfer() {
         TransferCreateDto transferCreateDto = buildTransferCreateDto();
         transferCreateDto.setFromAccountId(transferCreateDto.getToAccountId());
+        doThrow(InvalidOperationException.class)
+                .when(transferValidator)
+                .validateForSameAccount(transferCreateDto);
         assertThrows(
                 InvalidOperationException.class, () -> transferService.create(transferCreateDto));
         verifyNoInteractions(accountService);
@@ -121,6 +127,9 @@ class TransferServiceImplTest {
         AccountEntity fromAccount = buildFromAccount();
         fromAccount.setStatus(INACTIVE);
         when(accountService.getById(transferCreateDto.getFromAccountId())).thenReturn(fromAccount);
+        doThrow(InvalidOperationException.class)
+                .when(transferValidator)
+                .validateAccountActivity(fromAccount);
         assertThrows(
                 InvalidOperationException.class, () -> transferService.create(transferCreateDto));
         verify(accountService).getById(fromAccount.getId());
@@ -136,9 +145,12 @@ class TransferServiceImplTest {
         toAccount.setStatus(INACTIVE);
         when(accountService.getById(transferCreateDto.getFromAccountId())).thenReturn(fromAccount);
         when(accountService.getById(transferCreateDto.getFromAccountId())).thenReturn(toAccount);
+        doThrow(InvalidOperationException.class)
+                .when(transferValidator)
+                .validateAccountActivity(toAccount);
         assertThrows(
                 InvalidOperationException.class, () -> transferService.create(transferCreateDto));
-        verify(accountService, times(2)).getById(anyLong());
+        verify(accountService).getById(anyLong());
         verifyNoInteractions(transferRepository);
         verifyNoInteractions(transferHandler);
     }
@@ -150,6 +162,9 @@ class TransferServiceImplTest {
         AccountEntity fromAccount = buildFromAccount();
         fromAccount.setBalance(BigDecimal.valueOf(0));
         when(accountService.getById(transferCreateDto.getFromAccountId())).thenReturn(fromAccount);
+        doThrow(InvalidOperationException.class)
+                .when(transferValidator)
+                .validateTransferAmount(fromAccount, transferCreateDto.getAmount());
         assertThrows(
                 InvalidOperationException.class, () -> transferService.create(transferCreateDto));
         verify(accountService).getById(transferCreateDto.getFromAccountId());
