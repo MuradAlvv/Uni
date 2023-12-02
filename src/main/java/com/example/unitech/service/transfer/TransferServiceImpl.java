@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -25,6 +26,7 @@ public class TransferServiceImpl implements TransferService {
     private final TransferHandler transferHandler;
     private final TransferRepository transferRepository;
     private final TransferValidator transferValidator;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Override
     public TransferEntity create(TransferCreateDto transferCreateDto) {
@@ -51,7 +53,7 @@ public class TransferServiceImpl implements TransferService {
             return transferRepository.getByIdFetchUser(transfer.getId());
         }
         saveStatus(transfer, SUCCEEDED);
-        log.info("Transfer status = " + transfer.getStatus());
+        eventPublisher.publishEvent(new TransferCompletedEvent(this, transfer));
 
         return transfer;
     }
